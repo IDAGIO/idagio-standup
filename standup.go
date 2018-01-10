@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/abourget/slack"
+	"github.com/nlopes/slack"
 	"sync"
 	"time"
 )
@@ -96,7 +96,7 @@ func (self *Standup) Run() {
 	msg.WriteString("\n")
 
 	for user, anyReply := range self.userReplies {
-		userName := fmt.Sprintf("<@%s|%s>", user.Info.Id, user.Info.Name)
+		userName := fmt.Sprintf("<@%s|%s>", user.Info.ID, user.Info.Name)
 		switch reply := anyReply.(type) {
 		case userAnswersReply:
 			msg.WriteString(userName)
@@ -133,7 +133,7 @@ func (self *Standup) Run() {
 	params.LinkNames = 0
 	params.EscapeText = false
 
-	_, _, err := self.client.PostMessage(self.Channel.Id, msg.String(), params)
+	_, _, err := self.client.PostMessage(self.Channel.ID, msg.String(), params)
 	if err == nil {
 		DebugLog.Print("summary sent")
 	} else {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/abourget/slack"
+	"github.com/nlopes/slack"
 	"strings"
 	"time"
 )
@@ -99,7 +99,7 @@ func (self *User) start() {
 				if self.handleStandupCommand(e.Text) {
 					continue
 				}
-				DebugLog.Printf("reporting message id %s as answer from %s", e.Id, self.Info.Id)
+				DebugLog.Printf("reporting message id %s as answer from %s", e, self.Info.ID)
 				self.currentStandup.ReportUserAnswer(self, self.currentQuestionIdx, e.Text)
 				self.advanceQuestion()
 			}

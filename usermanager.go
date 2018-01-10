@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/abourget/slack"
+	"github.com/nlopes/slack"
 	"log"
 	"sync"
 )
@@ -62,8 +62,8 @@ func (self *UserManager) start() {
 
 		select {
 		case m := <-self.messageReplies:
-			if user, ok = self.usersByIMChannelId[m.ChannelId]; !ok {
-				user, err = self.lookupUserByIMChannelId(m.ChannelId)
+			if user, ok = self.usersByIMChannelId[m.Channel]; !ok {
+				user, err = self.lookupUserByIMChannelId(m.Channel)
 				if err != nil {
 					log.Printf(
 						"error getting channel info; message dropped: %s", err)
@@ -72,8 +72,8 @@ func (self *UserManager) start() {
 				if user == nil {
 					continue
 				} else {
-					self.usersByUserId[user.Info.Id] = user
-					self.usersByIMChannelId[m.ChannelId] = user
+					self.usersByUserId[user.Info.ID] = user
+					self.usersByIMChannelId[m.Channel] = user
 				}
 			}
 			DebugLog.Printf("delivering message %s to user %s", m.Timestamp, user.Info.Name)
@@ -114,8 +114,8 @@ func (self *UserManager) lookupUserByIMChannelId(channelId string) (user *User, 
 		return
 	}
 	for _, im := range ims {
-		if im.Id == channelId {
-			user, err = self.newUser(im.UserId, im.Id)
+		if im.User == channelId {
+			user, err = self.newUser(im.User, im.User)
 			if user == nil && err == nil {
 				self.channelIdBlacklist[channelId] = true
 			}
@@ -143,7 +143,7 @@ func (self *UserManager) newUser(userId string, imChannelId string) (user *User,
 		return nil, err
 	}
 	if userInfo.IsBot {
-		self.userIdBlacklist[userInfo.Id] = true
+		self.userIdBlacklist[userInfo.ID] = true
 		return nil, nil
 	}
 	return NewUser(self.client, *userInfo, imChannelId), nil

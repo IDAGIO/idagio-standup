@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/abourget/slack"
+	"github.com/nlopes/slack"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -77,11 +77,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("Couldn't log in: %s", err)
 	}
-	authClient := &AuthedSlack{Client: client, UserId: auth.UserId}
+	authClient := &AuthedSlack{Client: client, UserId: auth.UserID}
 
 	slackWS := authClient.NewRTM()
 	userManager := NewUserManager(authClient)
-	eventReceiver := NewEventReceiver(slackWS, userManager, auth.UserId)
+	eventReceiver := NewEventReceiver(slackWS, userManager, auth.UserID)
 	go eventReceiver.Start()
 
 	chs, err := authClient.GetChannels(true)
