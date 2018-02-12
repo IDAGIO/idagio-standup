@@ -11,7 +11,7 @@ import (
 type Standup struct {
 	Questions         []string
 	Finished          bool
-	Channel           slack.Channel
+	Channel           *slack.Channel
 	Duration          time.Duration
 	client            *AuthedSlack
 	userIds           []string
@@ -52,7 +52,7 @@ func (r userSkippedReply) isUserReply() {
 func (r userErrorReply) isUserReply() {
 }
 
-func NewStandup(client *AuthedSlack, channel slack.Channel, userManager *UserManager, reportedWaitGroup *sync.WaitGroup) (s *Standup) {
+func NewStandup(client *AuthedSlack, channel *slack.Channel, userManager *UserManager, reportedWaitGroup *sync.WaitGroup) (s *Standup) {
 
 	reportedWaitGroup.Add(1)
 

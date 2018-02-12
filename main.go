@@ -92,11 +92,18 @@ func main() {
 	exitWaitGroup := new(sync.WaitGroup)
 
 	for _, ch := range chs {
+
 		if ch.IsGeneral || !ch.IsMember {
 			continue
 		}
 
-		s := NewStandup(authClient, ch, userManager, exitWaitGroup)
+		channelInfo, err := authClient.GetChannelInfo(ch.ID)
+		if err != nil {
+			log.Fatalf("Couldn't get channel info: %s", err)
+		}
+
+		DebugLog.Print(len(channelInfo.Members))
+		s := NewStandup(authClient, channelInfo, userManager, exitWaitGroup)
 		go s.Run()
 	}
 
