@@ -13,7 +13,7 @@ import (
 var Questions = []string{
 	"What did you do yesterday?",
 	"What are you planning to do today?",
-	"Are you blocked by anything? If so, what?",
+	"Are you blocked by anything? If so, what? ⛔️ ",
 	"How are you feeling?",
 }
 
