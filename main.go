@@ -11,10 +11,10 @@ import (
 )
 
 var Questions = []string{
-	"What did you do yesterday?",
-	"What are you planning to do today?",
+	"What did you do yesterday? ⬅️ ",
+	"What are you planning to do today? ➡️ ",
 	"Are you blocked by anything? If so, what? ⛔️ ",
-	"How are you feeling?",
+	"How are you feeling? 🏖 ",
 }
 
 const StandupTimeMinutes = 30
@@ -22,7 +22,7 @@ const StandupTimeMinutes = 30
 var StandupNagMinuteDelays = []int{15, 25}
 
 const UserStandupStartText = "*WOOF!* Stand-up for #%s starting.\nMessage me `skip` to duck out of this one."
-const UserStandupEndText = "Thanks! All done."
+const UserStandupEndText = "Thanks! 🙏 All done."
 const UserStandupTimeUpText = "Too slow! The stand-up's finished now. Catch up in the channel."
 const UserStandupAlreadyFinishedText = "Your next standup would have been for #%s but it's already finished. Catch up in the channel."
 const UserNextStandupText = "But wait, you have another stand-up to attend…"
