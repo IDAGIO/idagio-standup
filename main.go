@@ -17,9 +17,9 @@ var Questions = []string{
 	"How are you feeling? 🏖 ",
 }
 
-const StandupTimeMinutes = 30
+const StandupTimeMinutes = 210
 
-var StandupNagMinuteDelays = []int{15, 25}
+var StandupNagMinuteDelays = []int{195, 205}
 
 const UserStandupStartText = "*WOOF!* Stand-up for #%s starting.\nMessage me `skip` to duck out of this one."
 const UserStandupEndText = "Thanks! 🙏 All done."
